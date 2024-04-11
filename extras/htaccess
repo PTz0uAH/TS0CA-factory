@@ -1,0 +1,18 @@
+# force use PHP 8.1
+AddType application/x-httpd-php81 .php
+
+# Eigen foutmeldingen lokale opslaglocatie
+ErrorDocument 404 ./guru/404.htm
+
+AddType image/png png
+AddType image/jpg jpg
+AddType image/svg+xml svg
+AddType text/css css
+AddType text/html html
+AddType application/x-javascript js
+AddType application/octet-stream lzx
+AddType application/octet-stream zip
+AddType application/octet-stream lha
+AddType application/wasm wasm
+AddType application/xml xml
+AddType application/json json

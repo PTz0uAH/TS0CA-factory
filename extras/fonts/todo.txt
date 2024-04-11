@@ -1,0 +1,9 @@
+L.S.
+the font comes from the TAWS v0.35dev version provided by Michael Rupp
+loading the font generates an error in the Firefox debug console
+which seems to be harmless yet needs to be fixed..
+ either with a new complient Topaz font..
+  or wait for Mozilla to fix Firefox which seems unlikely..
+for now we just "tolerate" it..
+because fundamental for the looks of our OldSchool Shell..
+PTz()uAH
