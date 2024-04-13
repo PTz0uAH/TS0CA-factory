@@ -9,7 +9,6 @@
 # AUTH: 1PTz(Peter Slootbeek)uAH20NaCl..v/hL8-T&~
 # COMMENT: "Just my 2cts to keep the momentum going.." 
 BUILD_NAME="${1:-TS0CA}"
-# GZ_TARGET="${BUILD_NAME}_beta_$(date +%Y%m%d_%H%M).tar.gz"
 ZIP_TARGET="${BUILD_NAME}_latest.zip"
 SAVE1="vAmigaWeb.github.io-main.zip"
 GET1="https://github.com/vAmigaWeb/vAmigaWeb.github.io/archive/refs/heads/main.zip"
@@ -49,12 +48,8 @@ if [ -e "$HOME/.local/bin/xdftool" ]
 then
 	echo "echo \"Creating empty Projects ADF (880KB ffs)..\" " >>job.sh
 	echo "xdftool $BUILD_DIR/adf/projects.adf format Projects ffs" >>job.sh
-#	echo "cp $HOME/.amiga/adf/wb31-install.adf $BUILD_DIR/adf/" >>job.sh
-#	echo "cp $HOME/.amiga/adf/wb31-workbench.adf $BUILD_DIR/adf/" >>job.sh
-#	echo "cp $HOME/.amiga/adf/wb31-fonts.adf $BUILD_DIR/adf/" >>job.sh
-#	echo "cp $HOME/.amiga/adf/wb31-locale.adf $BUILD_DIR/adf/" >>job.sh
-#	echo "cp $HOME/.amiga/adf/wb31-storage.adf $BUILD_DIR/adf/" >>job.sh
-#	echo "cp $HOME/.amiga/adf/wb31-extras.adf $BUILD_DIR/adf/" >>job.sh
+#	CUSTOMIZE THE BUILD IF NEEDED
+#	echo "zip -j $BUILD_DIR/adf/wb31-install.zip $HOME/.amiga/adf/wb31*.adf" >>job.sh
 else
 	echo "echo Please install AmiTools to use create-adf-on-the-fly feature.." >>job.sh
 fi
@@ -67,9 +62,11 @@ then
 	echo "rdbtool $BUILD_DIR/hdf/harddisk1.hdf add size=25%" >>job.sh
 	echo "echo \"Create second partition (153MB)..\" " >>job.sh
 	echo "rdbtool $BUILD_DIR/hdf/harddisk1.hdf add size=75%" >>job.sh
-	echo "tar czf $BUILD_DIR/hdf/harddisk1.tar.gz $BUILD_DIR/hdf/harddisk1.hdf" >>job.sh
-	echo "echo \"step1: Boot vAmigaWeb from wb-31-install.adf\" " >>job.sh
-	echo "echo \"step2: format the 2 partitions of harddisk1 as SYSTEM and WORK..\" " >>job.sh
+	echo "zip -j $BUILD_DIR/hdf/harddisk1.zip $BUILD_DIR/hdf/harddisk1.hdf" >>job.sh
+	echo "rm $BUILD_DIR/hdf/harddisk1.hdf" >>job.sh
+#	echo "echo \"step0: Feed vAmigaWeb the 3.1 ROM it needs to boot\" " >>job.sh
+#	echo "echo \"step1: Boot vAmigaWeb with wb-31-install.zip\" " >>job.sh
+#	echo "echo \"step2: format the 2 partitions of harddisk1.. i.e. SYSTEM and WORK..\" " >>job.sh
 else
 	echo "echo Please install AmiTools to use create-hdf-on-the-fly feature.." >>job.sh
 fi
@@ -81,14 +78,13 @@ echo "mv $BUILD_DIR/README.md $BUILD_DIR/licenses/JQuery_Terminal_README.md" >>j
 echo "mv $BUILD_DIR/LICENSE $BUILD_DIR/licenses/JQuery_Terminal_LICENSE" >>job.sh
 echo "sed -i 's@https://vamigaweb.github.io@.@g' $BUILD_DIR/js/vAmigaWeb_player.js" >>job.sh
 echo "sed -i 's@document.getElementById(\"vAmigaWeb\").onload = this.grab_focus;@//document.getElementById(\"vAmigaWeb\").onload = this.grab_focus;@g' $BUILD_DIR/js/vAmigaWeb_player.js" >>job.sh
-echo "cp -r ./extras/* $BUILD_DIR/" >>job.sh
+echo "unzip -q ./extras/assets.zip -d $BUILD_DIR/" >>job.sh
 echo "mv $BUILD_DIR/htaccess $BUILD_DIR/.htaccess" >>job.sh
 echo "wget -q -P$BUILD_DIR https://raw.github.com/PTz0uAH/AmiGoDOS/main/AmiGoDOS.php" >>job.sh
 echo "echo Packing $BUILD_DIR" >>job.sh
 echo "cd ./build/" >>job.sh
 echo "rm -Rf ./$ZIP_TARGET" >>job.sh
 echo "zip -r -q ./$ZIP_TARGET $BUILD_NAME" >>job.sh
-# echo "tar czf ./build/$GZ_TARGET $BUILD_DIR" >>job.sh
 chmod +x job.sh
 ./job.sh
 if [ -e "./build/$ZIP_TARGET" ]
@@ -97,3 +93,8 @@ then
 else
 	echo "Failed to create $ZIP_TARGET"
 fi
+# manual install: copy TS0CA.zip to the http(s)-server root and unpack.. i.e. localhost..
+# remote install: create a script to upload and unpack the archive on your http(s)-server 
+# if you run "just" a http server like tiny-web.. you can configure Chromium to treat its url as secure..
+# otherwise you will not have Amiga-audio.. if using another browser, please find an equivalent setting..
+# good luck betatesting and have fun resurrecting ==1..123PTz("The Spirit 0f Commodore Amiga")uAH.. 
