@@ -93,7 +93,7 @@ then
 else
 	echo "Failed to create $ZIP_TARGET"
 fi
-# manual install: copy TS0CA.zip to the http(s)-server root and unpack.. i.e. localhost..
+# manual install: copy TS0CA_latest.zip to the http(s)-server root and unpack.. i.e. localhost..
 # remote install: create a script to upload and unpack the archive on your http(s)-server 
 # if you run "just" a http server like tiny-web.. you can configure Chromium to treat its url as secure..
 # otherwise you will not have Amiga-audio.. if using another browser, please find an equivalent setting..
