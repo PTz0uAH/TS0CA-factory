@@ -49,7 +49,7 @@ then
 	echo "echo \"Creating empty Projects ADF (880KB ffs)..\" " >>job.sh
 	echo "xdftool $BUILD_DIR/adf/projects.adf format Projects ffs" >>job.sh
 #	CUSTOMIZE THE BUILD IF NEEDED
-	echo "zip -j $BUILD_DIR/adf/wb31-install.zip $HOME/.amiga/adf/wb31*.adf" >>job.sh
+#	echo "zip -j $BUILD_DIR/adf/wb31-install.zip $HOME/.amiga/adf/wb31*.adf" >>job.sh
 else
 	echo "echo Please install AmiTools to use create-adf-on-the-fly feature.." >>job.sh
 fi
