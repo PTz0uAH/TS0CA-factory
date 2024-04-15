@@ -49,7 +49,7 @@ then
 	echo "echo \"Creating empty Projects ADF (880KB ffs)..\" " >>job.sh
 	echo "xdftool $BUILD_DIR/adf/projects.adf format Projects ffs" >>job.sh
 #	CUSTOMIZE THE BUILD IF NEEDED
-#	echo "zip -j $BUILD_DIR/adf/wb31-install.zip $HOME/.amiga/adf/wb31*.adf" >>job.sh
+	echo "zip -j $BUILD_DIR/adf/wb31-install.zip $HOME/.amiga/adf/wb31*.adf" >>job.sh
 else
 	echo "echo Please install AmiTools to use create-adf-on-the-fly feature.." >>job.sh
 fi
@@ -81,6 +81,8 @@ echo "sed -i 's@document.getElementById(\"vAmigaWeb\").onload = this.grab_focus;
 echo "unzip -q ./extras/assets.zip -d $BUILD_DIR/" >>job.sh
 echo "mv $BUILD_DIR/htaccess $BUILD_DIR/.htaccess" >>job.sh
 echo "wget -q -P$BUILD_DIR https://raw.github.com/PTz0uAH/AmiGoDOS/main/AmiGoDOS.php" >>job.sh
+# AmiGoDOS PATCH FOR PHP <v8.0
+# echo "sed -i 's@str_contains@strpos@g' $BUILD_DIR/AmiGoDOS.php" >>job.sh
 echo "echo Packing $BUILD_DIR" >>job.sh
 echo "cd ./build/" >>job.sh
 echo "rm -Rf ./$ZIP_TARGET" >>job.sh
@@ -90,11 +92,13 @@ chmod +x job.sh
 if [ -e "./build/$ZIP_TARGET" ]
 then
 	echo "Successfully created $ZIP_TARGET"
+#	testing local httpserver on debian11: apache2 + php7.4..
+#	unzip -q ./build/$ZIP_TARGET -d /var/www/html/"
 else
 	echo "Failed to create $ZIP_TARGET"
 fi
 # manual install: copy TS0CA_latest.zip to the http(s)-server root and unpack.. i.e. localhost..
-# remote install: create a script to upload and unpack the archive on your http(s)-server 
+# remote install: create a script to upload and unpack the archive on your http(s)-server..
 # if you run "just" a http server like tiny-web.. you can configure Chromium to treat its url as secure..
-# otherwise you will not have Amiga-audio.. if using another browser, please find an equivalent setting..
+# otherwise you will not have Amiga-audio.. if using another browser, please set up a https-server..
 # good luck betatesting and have fun resurrecting ==1..123PTz("The Spirit 0f Commodore Amiga")uAH.. 
