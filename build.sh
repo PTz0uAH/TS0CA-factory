@@ -17,7 +17,7 @@ GET2="https://github.com/jcubic/jquery.terminal/archive/refs/tags/2.39.3.zip"
 SRC_DIR1="./source/vAmigaWeb.github.io-main"
 SRC_DIR2="./source/jquery.terminal-2.39.3"
 BUILD_DIR="./build/$BUILD_NAME"
-EXCLUDE_VAMIGAWEB="--exclude=.git* --exclude=doc --exclude=manifest.json --exclude=run*"
+EXCLUDE_VAMIGAWEB="--exclude=.git* --exclude=doc --exclude=run*"
 EXCLUDE_JQUERY_TERMINAL="--exclude=.* --exclude=__tests__ --exclude=assets --exclude=bin --exclude=examples --exclude=*.json --exclude=C* --exclude=files --exclude=Makefile --exclude=jest.* --exclude=*.ts --exclude import.html --exclude=manifest --exclude=scripts --exclude=templates"
 if [ -e "./source/$SAVE1" ]
 then
